@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### db structure ignore ###
+/src/main/kotlin/ru/beardedant/itokna/data/firebird/DBStructure.kt
