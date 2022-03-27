@@ -4,6 +4,6 @@ import java.sql.Connection
 
 interface FirebirdRepo {
     fun connectDB(): Connection
-    fun getDataFromDB():List<List<String>>
+    fun getDataFromDB():List<FireBirdData>
     fun closeConnect(connect: Connection)
 }

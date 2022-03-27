@@ -1,4 +1,4 @@
 package ru.beardedant.itokna.data.firebird
 
-class FireBirdData {
+data class FireBirdData(val art: String, val cost: String) {
 }

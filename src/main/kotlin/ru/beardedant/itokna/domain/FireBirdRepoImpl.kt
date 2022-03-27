@@ -4,6 +4,7 @@ package ru.beardedant.itokna.domain
 import ru.beardedant.itokna.data.firebird.DBStructure
 import ru.beardedant.itokna.data.firebird.FirebirdRepo
 import data.firebird.SQLQueries
+import ru.beardedant.itokna.data.firebird.FireBirdData
 import java.sql.Connection
 import java.sql.Driver
 import java.sql.DriverManager
@@ -36,17 +37,15 @@ class FireBirdRepoImpl : FirebirdRepo {
         return connect!!
     }
 
-    override fun getDataFromDB():List<List<String>> {
+    override fun getDataFromDB(): List<FireBirdData> {
         val connect = connectDB()
-        val resultPrice = mutableListOf<MutableList<String>>()
+        val resultPrice = mutableListOf<FireBirdData>()
         val statement = connect.createStatement()
 
         val result = statement.executeQuery(SQLQueries.SQL_SELECT)
 
         while (result.next()) {
-            val stringPrice = mutableListOf<String>()
-            stringPrice.add(result.getString(db.DB_FIELD_ART))
-            stringPrice.add(result.getString(db.DB_FIELD_COST) ?: "0")
+            val stringPrice = FireBirdData(result.getString(db.DB_FIELD_ART), result.getString(db.DB_FIELD_COST) ?: "0")
             resultPrice.add(stringPrice)
         }
 
