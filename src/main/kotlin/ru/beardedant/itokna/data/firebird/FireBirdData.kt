@@ -1,4 +1,9 @@
 package ru.beardedant.itokna.data.firebird
 
-data class FireBirdData(val art: String, val cost: String) {
+data class FireBirdData(
+    val orderStatus: String,
+    val orderId: String,
+    val orderData: String,
+    val orderSQRT: String
+) {
 }

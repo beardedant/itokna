@@ -4,14 +4,14 @@ import ru.beardedant.itokna.data.firebird.DBStructure
 
 object SQLQueries {
     private val db = DBStructure
-    const val SQL_SELECT: String =
-        "select ${db.DB_TABLE_MATERIALS}.${db.DB_FIELD_ART}, " +
-                "${db.DB_TABLE_MATERIAL_COST}.${db.DB_FIELD_COST} " +
-                "from ${db.DB_TABLE_MATERIAL_COST},${db.DB_TABLE_MATERIALS} " +
-                "where ${db.DB_TABLE_MATERIAL_COST}.${db.DB_FIELD_MATERIAL_ID} = ${db.DB_TABLE_MATERIALS}.${db.DB_FIELD_MATERIAL_ID}"
 
-    const val SQL_UPDATE_VAL_ID: String =
-        "update ${db.DB_TABLE_MATERIALS} " +
-                "set ${db.DB_TABLE_MATERIALS}.${db.DB_FIELD_VAL_ID} = '2' " +
-                "where ${db.DB_TABLE_MATERIALS}.${db.DB_FIELD_ART} = ?"
+    const val SQL_SELECT_STATUS: String =
+        " select " +
+                "z.${db.DB_FIELD_ID_DOC}, " +
+                "z.${db.DB_FIELD_DOC_NUMBER}, " +
+                "z.${db.DB_FIELD_DOC_DATE}, " +
+                "z.${db.DB_FIELD_STATUS}, " +
+                "f.${db.DB_FIELD_ORDER_SQRT} " +
+                "from ${db.DB_TABLE_ORDER} z, ${db.DB_TABLE_CONSTRUCTIONS} f " +
+                "where z.${db.DB_FIELD_ID_DOC} = f.${db.DB_FIELD_ID_DOC} AND z.${db.DB_FIELD_DOC_NUMBER} = ?"
 }

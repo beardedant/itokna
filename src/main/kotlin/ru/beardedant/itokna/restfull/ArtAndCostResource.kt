@@ -13,5 +13,5 @@ import javax.ws.rs.core.MediaType
 class ArtAndCostResource {
     @GET
     @Produces(MediaType.TEXT_HTML)
-    fun resultList(@PathParam ("id") id :Int) = FireBirdRepoImpl().getDataFromDB()[id].toString()
+    fun resultList(@PathParam ("id") id :Int) = FireBirdRepoImpl().getDataFromDB(id).toString()
 }

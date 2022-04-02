@@ -1,10 +1,10 @@
 package ru.beardedant.itokna.domain
 
 
-import ru.beardedant.itokna.data.firebird.DBStructure
-import ru.beardedant.itokna.data.firebird.FirebirdRepo
 import data.firebird.SQLQueries
+import ru.beardedant.itokna.data.firebird.DBStructure
 import ru.beardedant.itokna.data.firebird.FireBirdData
+import ru.beardedant.itokna.data.firebird.FirebirdRepo
 import java.sql.Connection
 import java.sql.Driver
 import java.sql.DriverManager
@@ -37,15 +37,24 @@ class FireBirdRepoImpl : FirebirdRepo {
         return connect!!
     }
 
-    override fun getDataFromDB(): List<FireBirdData> {
+    override fun getDataFromDB(id:Int): List<FireBirdData> {
         val connect = connectDB()
         val resultPrice = mutableListOf<FireBirdData>()
         val statement = connect.createStatement()
 
-        val result = statement.executeQuery(SQLQueries.SQL_SELECT)
+//        val result = statement.executeQuery(SQLQueries.SQL_SELECT_STATUS)
+
+        val prep = connect.prepareStatement(SQLQueries.SQL_SELECT_STATUS)
+        prep.setString(1, id.toString())
+        val result = prep.executeQuery()
 
         while (result.next()) {
-            val stringPrice = FireBirdData(result.getString(db.DB_FIELD_ART), result.getString(db.DB_FIELD_COST) ?: "0")
+            val stringPrice = FireBirdData(
+                result.getString(db.DB_FIELD_STATUS),
+                result.getString(db.DB_FIELD_DOC_NUMBER),
+                result.getNString(db.DB_FIELD_DOC_DATE),
+                result.getNString(db.DB_FIELD_ORDER_SQRT)
+            )
             resultPrice.add(stringPrice)
         }
 
