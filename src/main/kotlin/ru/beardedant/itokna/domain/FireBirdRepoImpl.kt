@@ -50,7 +50,7 @@ class FireBirdRepoImpl : FirebirdRepo {
 
         while (result.next()) {
             val stringPrice = FireBirdData(
-                result.getString(db.DB_FIELD_STATUS),
+                result.getNString(db.DB_FIELD_STATUS_NAME),
                 result.getString(db.DB_FIELD_DOC_NUMBER),
                 result.getNString(db.DB_FIELD_DOC_DATE),
                 result.getNString(db.DB_FIELD_ORDER_SQRT)
